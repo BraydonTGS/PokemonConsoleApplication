@@ -1,5 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using PokemonConsoleApp;
 
-string name = "charizard";
-var ApiString = $"https://pokeapi.co/api/v2/pokemon/{name}/";
+World myWorld = new World();
+
+myWorld.Run();
