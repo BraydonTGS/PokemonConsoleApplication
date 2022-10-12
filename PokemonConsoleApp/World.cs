@@ -6,6 +6,7 @@ namespace PokemonConsoleApp
     public class World
     {
         private string _apiString { get; set; }
+
         public World()
         {
         }
@@ -13,14 +14,19 @@ namespace PokemonConsoleApp
         public void Run()
         {
             Write("> Please Enter The Name You want to Search For: ");
-            var pokeName = ReadLine().ToLower().Trim();
+            var pokeName = ReadLine()?.ToLower().Trim();
 
             _apiString = $"https://pokeapi.co/api/v2/pokemon/{pokeName}/";
 
             var name = CatchPokemon.GetName(_apiString);
             var number = CatchPokemon.GetNumber(_apiString);
+            var moves = CatchPokemon.GetAbilities(_apiString);
             WriteLine(name);
             WriteLine(number);
+            foreach (var item in moves)
+            {
+                WriteLine(item);
+            }
             ReadKey();
 
         }

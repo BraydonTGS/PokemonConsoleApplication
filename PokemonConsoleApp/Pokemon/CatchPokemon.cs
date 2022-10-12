@@ -9,7 +9,7 @@ namespace PokemonConsoleApp.Pokemon
         {
             var client = new HttpClient();
             var response = client.GetStringAsync(apiCall).Result;
-            var name = JObject.Parse(response)["name"]?.ToString() ?? "Error";
+            var name = JObject.Parse(response)["name"]?.ToString() ?? "Null";
 
             return name;
         }
@@ -22,13 +22,20 @@ namespace PokemonConsoleApp.Pokemon
         {
             var client = new HttpClient();
             var response = client.GetStringAsync(apiCall).Result;
-            var number = int.Parse(JObject.Parse(response)["id"]?.ToString());
+            var number = int.Parse(JObject.Parse(response)?["id"]?.ToString() ?? "Null");
 
             return number;
         }
-        public static IEnumerable<string> GetAbilities()
+        public static List<string> GetAbilities(string apiCall)
         {
-            return null;
+            var moves = new List<string>();
+            var client = new HttpClient();
+            var response = client.GetStringAsync(apiCall).Result;
+            var move1 = JObject.Parse(response)?["abilities"]?[0]?["ability"]?["name"]?.ToString() ?? "Null";
+            var move2 = JObject.Parse(response)["abilities"]?[1]?["ability"]?["name"]?.ToString() ?? "Null";
+            moves.Add(move1);
+            moves.Add(move2);
+            return moves;
         }
         public static string GetSprite()
         {
@@ -38,17 +45,4 @@ namespace PokemonConsoleApp.Pokemon
 }
 
 
-
-
-//public static double GetTemp(string apiCall)
-//{
-//    var client = new HttpClient();
-
-//    var response = client.GetStringAsync(apiCall).Result;
-
-//    var temp = double.Parse(JObject.Parse(response)["main"]["temp"].ToString());
-
-//    return temp;
-
-//}
 
