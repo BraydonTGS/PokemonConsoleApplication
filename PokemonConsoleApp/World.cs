@@ -25,8 +25,8 @@ namespace PokemonConsoleApp
             var pokemon = CatchPokemon.GetPokemon(_apiString);
 
             Console.WriteLine(pokemon);
-            Console.WriteLine(pokemon.Name);
-            Console.WriteLine(pokemon.Abilities);
+            Console.WriteLine(pokemon.name);
+
 
             Console.ReadKey();
 
