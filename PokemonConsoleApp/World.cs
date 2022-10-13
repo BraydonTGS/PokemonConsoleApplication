@@ -21,23 +21,12 @@ namespace PokemonConsoleApp
 
             _apiString = $"https://pokeapi.co/api/v2/pokemon/{pokeName}/";
 
-            var name = CatchPokemon.GetName(_apiString);
-            var number = CatchPokemon.GetNumber(_apiString);
-            var moves = CatchPokemon.GetAbilities(_apiString);
-            var type = CatchPokemon.GetType(_apiString);
-            var sprites = CatchPokemon.GetSprite(_apiString);
 
-            IPokemon newPokemon = new Pokemon(name, type, number, moves, sprites);
+            var pokemon = CatchPokemon.GetPokemon(_apiString);
 
-            _pokemons.pokedex.Add(newPokemon);
-
-            foreach (var pokemon in _pokemons.pokedex)
-            {
-                Console.WriteLine(pokemon.Name);
-                Console.WriteLine(pokemon.Number);
-                Console.WriteLine(pokemon.Abilities[0]);
-                Console.WriteLine(pokemon.Type);
-            }
+            Console.WriteLine(pokemon);
+            Console.WriteLine(pokemon.Name);
+            Console.WriteLine(pokemon.Abilities);
 
             Console.ReadKey();
 
