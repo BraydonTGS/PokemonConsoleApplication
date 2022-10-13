@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using PokemonConsoleApp.Pokemons;
+using PokemonConsoleApp.Printing;
 using static System.Console;
 namespace PokemonConsoleApp
 {
@@ -16,8 +17,12 @@ namespace PokemonConsoleApp
 
         public void Run()
         {
-            Write("> Please Enter The Name You want to Search For: ");
+            Print.PrintTitle();
+            ConsoleColor prevColor = ForegroundColor;
+            ForegroundColor = ConsoleColor.Red;
+            Write("\n> Please Enter The Name You want to Search For: ");
             var pokeName = ReadLine()?.ToLower().Trim();
+            ForegroundColor = prevColor;
 
             _apiString = $"https://pokeapi.co/api/v2/pokemon/{pokeName}/";
 
@@ -26,10 +31,10 @@ namespace PokemonConsoleApp
 
             _pokemons.pokedex.Add(pokemon);
 
-
-            object[] ary = { "1", 2, "string", 8, 'c' };
-
-            WriteLine($"\n> Name: {pokemon.name}\n");
+            Print.Loading();
+            ForegroundColor = ConsoleColor.Yellow;
+            WriteLine($"----------------------------------------------------------------\n");
+            WriteLine($"> Name: {pokemon.name}\n");
             WriteLine($"> Base Exp: {pokemon.base_experience}\n");
             pokemon.abilities.ForEach(x => WriteLine($"> Abilities: {x.ability.name}\n"));
             WriteLine($"> Height: {pokemon.height}\n");
@@ -38,6 +43,7 @@ namespace PokemonConsoleApp
             WriteLine($"> Location: {pokemon.location_area_encounters}\n");
             pokemon.types.ForEach(x => WriteLine($"> Type: {x.type.name}\n"));
             WriteLine($"> Weight: {pokemon.weight}\n");
+            WriteLine($"----------------------------------------------------------------");
             Console.ReadKey();
 
 
