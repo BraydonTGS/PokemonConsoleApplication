@@ -5,35 +5,19 @@ namespace PokemonConsoleApp.Pokemons
 {
     public class Pokemon : IPokemon
     {
-
-        [JsonProperty("base_experience")]
+        public List<Ability>? abilities { get; set; }
         public int base_experience { get; set; }
-
-        [JsonProperty("height")]
         public int height { get; set; }
-
-        [JsonProperty("held_items")]
-        public List<object> held_items { get; set; }
-
-        [JsonProperty("id")]
+        public List<object>? held_items { get; set; }
         public int id { get; set; }
-
-        [JsonProperty("is_default")]
-        public bool is_default { get; set; }
-
-        [JsonProperty("location_area_encounters")]
-        public string location_area_encounters { get; set; }
-
-        [JsonProperty("name")]
-        public string name { get; set; }
-
-        [JsonProperty("order")]
-        public int Order { get; set; }
-
-        [JsonProperty("past_types")]
-        public List<object> past_types { get; set; }
-
-        [JsonProperty("weight")]
+        public string? location_area_encounters { get; set; }
+        public List<Move>? moves { get; set; }
+        public string? name { get; set; }
+        public int order { get; set; }
+        public List<object>? past_types { get; set; }
+        public Sprites? sprites { get; set; }
+        public List<Stat>? stats { get; set; }
+        public List<Type>? types { get; set; }
         public int weight { get; set; }
     }
 }

@@ -24,8 +24,25 @@ namespace PokemonConsoleApp
 
             var pokemon = CatchPokemon.GetPokemon(_apiString);
 
-            Console.WriteLine(pokemon);
-            Console.WriteLine(pokemon.name);
+            _pokemons.pokedex.Add(pokemon);
+
+
+
+
+            WriteLine($"> Name: {pokemon.name}");
+            WriteLine($"> Base Exp: {pokemon.base_experience}");
+            WriteLine($"> Abilities: {pokemon.abilities.Select(item => item.ability)}");
+            WriteLine($"> Height: {pokemon.height}");
+            WriteLine($"> Items: {pokemon.held_items}");
+            WriteLine($"> ID: {pokemon.id}");
+            WriteLine($"> Location: {pokemon.location_area_encounters}");
+            WriteLine($"> Type:  {pokemon.types}");
+            WriteLine($"> Weight: {pokemon.weight}");
+            Console.ReadKey();
+
+
+
+
 
 
             Console.ReadKey();

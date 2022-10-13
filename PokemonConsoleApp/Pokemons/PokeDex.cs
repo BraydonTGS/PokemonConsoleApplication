@@ -3,11 +3,11 @@ namespace PokemonConsoleApp.Pokemons
 {
     public class PokeDex
     {
-        public List<IPokemon> pokedex { get; set; }
+        public List<Pokemon> pokedex { get; set; }
 
         public PokeDex()
         {
-            pokedex = new List<IPokemon>();
+            pokedex = new List<Pokemon>();
         }
     }
 }
