@@ -27,17 +27,17 @@ namespace PokemonConsoleApp
             _pokemons.pokedex.Add(pokemon);
 
 
+            object[] ary = { "1", 2, "string", 8, 'c' };
 
-
-            WriteLine($"> Name: {pokemon.name}");
-            WriteLine($"> Base Exp: {pokemon.base_experience}");
-            WriteLine($"> Abilities: {pokemon.abilities.Select(item => item.ability)}");
-            WriteLine($"> Height: {pokemon.height}");
-            WriteLine($"> Items: {pokemon.held_items}");
-            WriteLine($"> ID: {pokemon.id}");
-            WriteLine($"> Location: {pokemon.location_area_encounters}");
-            WriteLine($"> Type:  {pokemon.types}");
-            WriteLine($"> Weight: {pokemon.weight}");
+            WriteLine($"\n> Name: {pokemon.name}\n");
+            WriteLine($"> Base Exp: {pokemon.base_experience}\n");
+            pokemon.abilities.ForEach(x => WriteLine($"> Abilities: {x.ability.name}\n"));
+            WriteLine($"> Height: {pokemon.height}\n");
+            WriteLine($"> Items: {pokemon.held_items}\n");
+            WriteLine($"> ID: {pokemon.id}\n");
+            WriteLine($"> Location: {pokemon.location_area_encounters}\n");
+            pokemon.types.ForEach(x => WriteLine($"> Type: {x.type.name}\n"));
+            WriteLine($"> Weight: {pokemon.weight}\n");
             Console.ReadKey();
 
 
