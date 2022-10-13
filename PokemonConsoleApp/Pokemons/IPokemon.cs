@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PokemonConsoleApp.Pokemon
+namespace PokemonConsoleApp.Pokemons
 {
     public interface IPokemon
     {

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Text.Json;
 using Newtonsoft.Json.Linq;
 
-namespace PokemonConsoleApp.Pokemon
+namespace PokemonConsoleApp.Pokemons
 {
-    public static class CatchPokemon
+    public class CatchPokemon
+
     {
+
         public static string GetName(string apiCall)
         {
             var client = new HttpClient();
@@ -14,10 +17,15 @@ namespace PokemonConsoleApp.Pokemon
             return name;
         }
 
-        public static string GetType()
+        public static string GetType(string apiCall)
         {
-            return "";
+            var client = new HttpClient();
+            var response = client.GetStringAsync(apiCall).Result;
+            var type = JObject.Parse(response)?["types"]?[0]?["type"]?["name"]?.ToString() ?? "Null";
+
+            return type;
         }
+
         public static int GetNumber(string apiCall)
         {
             var client = new HttpClient();
@@ -26,6 +34,17 @@ namespace PokemonConsoleApp.Pokemon
 
             return number;
         }
+
+        public static string GetSprite(string apiCall)
+        {
+            var client = new HttpClient();
+            var response = client.GetStringAsync(apiCall).Result;
+            var sprite = JObject.Parse(response)?["sprites"]?["back_default"]?.ToString() ?? "Null";
+
+            return sprite;
+        }
+
+
         public static List<string> GetAbilities(string apiCall)
         {
             var moves = new List<string>();
@@ -36,10 +55,6 @@ namespace PokemonConsoleApp.Pokemon
             moves.Add(move1);
             moves.Add(move2);
             return moves;
-        }
-        public static string GetSprite()
-        {
-            return "";
         }
     }
 }
