@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
-using PokemonConsoleApp.Pokemons;
+using PokemonConsoleApp.Pokedex;
+using PokemonConsoleApp.Pokemon_Obj;
+using PokemonConsoleApp.PokemonsApi;
 using PokemonConsoleApp.Printing;
 using static System.Console;
 namespace PokemonConsoleApp
@@ -9,6 +11,7 @@ namespace PokemonConsoleApp
     {
         private string _apiString { get; set; }
         private PokeDex _pokemons { get; set; } = new PokeDex();
+        private CatchPokemon _getPokemon { get; set; } = new CatchPokemon();
 
         public World()
         {
@@ -18,41 +21,44 @@ namespace PokemonConsoleApp
         public void Run()
         {
             Print.PrintTitle();
-            ConsoleColor prevColor = ForegroundColor;
-            ForegroundColor = ConsoleColor.Red;
-            Write("\n> Please Enter The Name You want to Search For: ");
-            var pokeName = ReadLine()?.ToLower().Trim();
-            ForegroundColor = prevColor;
-
-            _apiString = $"https://pokeapi.co/api/v2/pokemon/{pokeName}/";
-
-
-            var pokemon = CatchPokemon.GetPokemon(_apiString);
-
+            var pokeName = Print.PrintPrompt();
+            IPokemon pokemon = _getPokemon.GetPokemon(pokeName);
             _pokemons.pokedex.Add(pokemon);
-
             Print.Loading();
-            ForegroundColor = ConsoleColor.Yellow;
-            WriteLine($"----------------------------------------------------------------\n");
-            WriteLine($"> Name: {pokemon.name}\n");
-            WriteLine($"> Base Exp: {pokemon.base_experience}\n");
-            pokemon.abilities.ForEach(x => WriteLine($"> Abilities: {x.ability.name}\n"));
-            WriteLine($"> Height: {pokemon.height}\n");
-            WriteLine($"> Items: {pokemon.held_items}\n");
-            WriteLine($"> ID: {pokemon.id}\n");
-            WriteLine($"> Location: {pokemon.location_area_encounters}\n");
-            pokemon.types.ForEach(x => WriteLine($"> Type: {x.type.name}\n"));
-            WriteLine($"> Weight: {pokemon.weight}\n");
-            WriteLine($"----------------------------------------------------------------");
-            Console.ReadKey();
+            Print.PrintTitlePokemon();
+            Print.PrintPokemon(pokemon);
+            Print.Continue();
+            ContinueSearch();
+        }
 
+        public void ContinueSearch()
+        {
+            Print.Loading();
+            Print.PrintTitle();
 
+            string prompt = "> Would you like to search again? ";
+            string[] options = { "Yes", "No" };
 
+            var selectedIndex = Print.PrintCustomMenu(prompt, options);
 
+            if (selectedIndex == 0)
+            {
+                Run();
+            }
+            else if (selectedIndex == 1)
+            {
+                ExitGame();
+            }
+        }
 
-
-            Console.ReadKey();
-
+        // Exit //
+        public void ExitGame()
+        {
+            Print.PrintTitle();
+            Print.Exit();
+            ReadKey();
+            Print.Loading();
+            Environment.Exit(0);
         }
     }
 }

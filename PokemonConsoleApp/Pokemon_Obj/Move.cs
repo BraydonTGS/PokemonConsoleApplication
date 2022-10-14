@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace PokemonConsoleApp.Pokemons
+namespace PokemonConsoleApp.Pokemon_Obj
 {
     public class Move
     {
